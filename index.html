@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحامية حنين الطائي | للاستشارات القانونية</title>
+    
+    <!-- خطوط جوجل (Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- إعدادات Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Cairo', 'sans-serif'], },
+                    colors: {
+                        'lux-dark': '#070F2B', 'lux-panel': '#1B263B', 'lux-bg': '#F9FAFB',
+                        'gold-light': '#FCEABB', 'gold-main': '#D4AF37', 'gold-dark': '#AA8529',
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #AA8529 0%, #E8C872 50%, #AA8529 100%)',
+                        'dark-gradient': 'linear-gradient(135deg, #070F2B 0%, #111827 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Cairo', sans-serif; background-color: #F9FAFB; }
+
+        .text-gold-gradient {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            background-size: 200% auto; animation: shine 5s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .hero-watermark {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+            object-fit: contain; object-position: bottom left; opacity: 0.35;
+            mix-blend-mode: luminosity; pointer-events: none; z-index: 1;
+            -webkit-mask-image: radial-gradient(circle at bottom left, black 30%, transparent 70%);
+            mask-image: radial-gradient(circle at bottom left, black 30%, transparent 70%);
+        }
+        @media (min-width: 1024px) {
+            .hero-watermark {
+                width: 60%; opacity: 0.45;
+                -webkit-mask-image: linear-gradient(to right, black 20%, transparent 100%), linear-gradient(to top, black 20%, transparent 100%);
+                mask-image: linear-gradient(to right, black 40%, transparent 90%), linear-gradient(to top, black 10%, transparent 100%);
+                mask-composite: intersect; -webkit-mask-composite: source-in;
+            }
+        }
+
+        .ticker-wrap { width: 100%; overflow: hidden; background-color: #070F2B; color: #FCEABB; padding: 10px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.3); position: relative; z-index: 50; }
+        .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; box-sizing: content-box; animation: ticker 30s linear infinite; font-weight: 500; font-size: 0.95rem; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(100%, 0, 0); } }
+        .ticker-item { display: inline-block; padding: 0 3rem; }
+
+        .lux-card { background: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); border: 1px solid rgba(212, 175, 55, 0.1); transition: all 0.4s; cursor: pointer; }
+        .lux-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15); border-color: #D4AF37; }
+
+        .section-title { position: relative; display: inline-block; padding-bottom: 15px; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, transparent, #D4AF37, transparent); }
+
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        @keyframes pulse-whatsapp { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        .whatsapp-float { animation: pulse-whatsapp 2s infinite; }
+
+        #search-modal, #article-modal, #admin-modal { backdrop-filter: blur(12px); transition: opacity 0.3s ease; }
+        .hero-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+
+        #toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(50px); background: #10B981; color: white; padding: 12px 24px; border-radius: 50px; font-weight: bold; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; }
+        #toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        .credit-card { background: linear-gradient(135deg, #a496db 0%, #bcaee0 50%, #e0dde8 100%); border: 1px solid rgba(255,255,255,0.4); position: relative; overflow: hidden; }
+        .credit-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100C20 100 50 80 50 50S80 0 100 0' stroke='rgba(255,255,255,0.2)' stroke-width='2' fill='none'/%3E%3C/svg%3E"); background-size: cover; opacity: 0.5; pointer-events: none; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-gold-main selection:text-lux-dark">
+
+    <div id="toast"><i class="fas fa-check-circle mr-2"></i> تم تنفيذ الطلب بنجاح!</div>
+
+    <!-- نافذة إضافة محتوى (لوحة تحكم المحامية) -->
+    <div id="admin-modal" class="fixed inset-0 bg-lux-dark/95 z-[120] hidden flex-col items-center justify-center p-4 opacity-0">
+        <div class="w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-transform scale-95 border border-gold-main/50 flex flex-col" id="admin-container">
+            <div class="flex justify-between items-center p-6 border-b border-gray-100 bg-gray-50 relative">
+                <div class="absolute top-0 right-0 w-full h-1 bg-gold-gradient"></div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-lux-dark text-gold-main rounded-full flex items-center justify-center text-xl"><i class="fas fa-cog"></i></div>
+                    <h2 class="text-2xl font-black text-lux-dark">لوحة تحكم المحامية</h2>
+                </div>
+                <button onclick="closeAdmin()" class="text-gray-400 hover:text-red-500 transition"><i class="fas fa-times text-2xl"></i></button>
+            </div>
+            
+            <div class="p-6 md:p-8 overflow-y-auto bg-white">
+                <p class="text-sm text-gray-500 mb-6 font-bold"><i class="fas fa-info-circle text-gold-main"></i> يمكنك من هنا إضافة مقالات أو قوانين جديدة للموقع مباشرة.</p>
+                <form id="admin-form" onsubmit="addNewContent(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">أين تريدين إضافة المحتوى؟</label>
+                        <select id="content-type" class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-main outline-none font-bold text-lux-dark">
+                            <option value="article">قسم الإضاءات والقرارات (مقال/قرار جديد)</option>
+                            <option value="law">مكتبة القوانين العراقية (قانون جديد)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">عنوان المقال أو اسم القانون</label>
+                        <input type="text" id="content-title" required class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-main outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">التصنيف (مثال: حصري، مبدأ، رقم السنة)</label>
+                        <input type="text" id="content-tag" required class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-main outline-none">
+                    </div>
+                    <div id="content-desc-wrapper">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">النص الكامل للمقال أو القرار</label>
+                        <textarea id="content-desc" rows="5" placeholder="اكتبي النص هنا، سيتمكن الزائر من قراءته داخل الموقع..." class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-main outline-none resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gold-gradient text-lux-dark font-black text-lg py-4 rounded-xl hover:shadow-lg transition-all">نشر المحتوى الآن <i class="fas fa-upload ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة قراءة المقال -->
+    <div id="article-modal" class="fixed inset-0 bg-lux-dark/90 z-[110] hidden flex-col items-center justify-center p-4 opacity-0">
+        <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-transform scale-95 border border-gold-main/30 flex flex-col max-h-[90vh]" id="article-container">
+            <div class="flex justify-between items-start p-6 md:p-8 border-b border-gray-100 bg-gray-50 relative">
+                <div class="absolute top-0 right-0 w-32 h-1 bg-gold-gradient"></div>
+                <div class="pr-2">
+                    <span id="modal-tag" class="bg-lux-panel text-white text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block">تصنيف المقال</span>
+                    <h2 id="modal-title" class="text-2xl md:text-3xl font-black text-lux-dark leading-snug">عنوان المقال يظهر هنا</h2>
+                </div>
+                <button onclick="closeArticle()" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-red-500 hover:bg-red-50 transition shadow-sm flex-shrink-0"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-grow bg-white">
+                <div id="modal-content" class="text-gray-600 text-lg leading-loose font-medium space-y-4"></div>
+            </div>
+            <div class="p-6 border-t border-gray-100 bg-gray-50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-lux-dark flex items-center justify-center text-gold-main font-black text-lg">ح</div>
+                    <div><p class="font-black text-lux-dark text-sm">المحامية حنين الطائي</p></div>
+                </div>
+                <button onclick="closeArticle()" class="px-8 py-3 rounded-xl border-2 border-gray-200 text-gray-600 font-bold hover:bg-gray-100 transition w-full sm:w-auto">إغلاق القراءة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة البحث -->
+    <div id="search-modal" class="fixed inset-0 bg-lux-dark/90 z-[100] hidden flex-col items-center pt-32 px-4 opacity-0">
+        <div class="w-full max-w-3xl bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-transform scale-95 border border-gold-main/30" id="search-container">
+            <div class="flex items-center p-5 border-b border-gray-100 bg-gray-50">
+                <i class="fas fa-search text-gold-main text-2xl ml-4"></i>
+                <input type="text" id="search-input" placeholder="ابحث في القوانين، القرارات، أو الأقسام..." class="w-full bg-transparent text-xl outline-none text-lux-dark font-bold placeholder-gray-400">
+                <button onclick="closeSearch()" class="text-gray-400 hover:text-red-500 transition mr-4"><i class="fas fa-times text-3xl"></i></button>
+            </div>
+            <div id="search-results" class="max-h-[60vh] overflow-y-auto bg-white p-2">
+                <div class="text-center text-gray-400 py-12 font-medium">اكتب كلمة للبحث</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الأزرار العائمة -->
+    <!-- زر الواتساب للعملاء -->
+    <a href="https://wa.me/9647770001992" target="_top" class="fixed bottom-8 left-8 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:bg-green-500 hover:scale-110 transition-all z-50 whatsapp-float" title="تواصل معنا بسرية تامة">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- زر الإدارة (لوحة التحكم الخاصة بكِ) -->
+    <button onclick="openAdmin()" class="fixed bottom-8 right-8 bg-lux-dark text-gold-main border-2 border-gold-main/50 w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:bg-gold-main hover:text-lux-dark hover:scale-110 transition-all z-50" title="لوحة التحكم (إضافة محتوى)">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- شريط الأخبار -->
+    <div class="ticker-wrap fixed top-0 w-full">
+        <div class="ticker">
+            <span class="ticker-item"><i class="fas fa-balance-scale ml-2 text-gold-main"></i>المنصة الرقمية الرسمية للمحامية حنين الطائي للاستشارات القانونية</span>
+            <span class="ticker-item"><i class="fas fa-shield-alt ml-2 text-gold-main"></i>نضمن لكم السرية التامة في جميع الاستشارات والقضايا</span>
+        </div>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav class="fixed top-[45px] w-full z-40 bg-white/85 backdrop-blur-lg shadow-sm border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex-shrink-0 flex items-center">
+                    <div class="flex flex-col">
+                        <h1 class="text-3xl font-black text-lux-dark tracking-tight">المحامية <span class="text-gold-gradient">حنين الطائي</span></h1>
+                        <span class="text-xs font-bold text-gray-500 tracking-widest mt-1">للاستشارات القانونية والمحاماة</span>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex space-x-reverse space-x-8 items-center">
+                    <a href="#home" class="text-gray-600 hover:text-gold-main font-bold transition">الرئيسية</a>
+                    <a href="#departments" class="text-gray-600 hover:text-gold-main font-bold transition">أقسامنا</a>
+                    <a href="#articles" class="text-gray-600 hover:text-gold-main font-bold transition">إضاءات قضائية</a>
+                    <a href="#laws" class="text-gray-600 hover:text-gold-main font-bold transition">القوانين</a>
+                    <a href="#research" class="text-gray-600 hover:text-gold-main font-bold transition">شارك ببحثك</a>
+                    <div class="h-8 w-px bg-gray-200"></div>
+                    <button onclick="openSearch()" class="text-gray-600 hover:text-gold-main transition transform hover:scale-110"><i class="fas fa-search text-xl"></i></button>
+                    <a href="https://wa.me/9647770001992" target="_top" class="bg-gold-gradient text-white px-8 py-3 rounded-full font-bold hover:shadow-[0_10px_20px_rgba(212,175,55,0.4)] hover:-translate-y-1 transition-all duration-300">
+                        استشارة عبر واتساب <i class="fab fa-whatsapp mr-2 text-lg"></i>
+                    </a>
+                </div>
+
+                <div class="lg:hidden flex items-center gap-4">
+                    <button onclick="openSearch()" class="text-lux-dark"><i class="fas fa-search text-2xl"></i></button>
+                    <button id="mobile-menu-btn" class="text-lux-dark"><i class="fas fa-bars text-3xl"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-2xl">
+            <div class="px-4 pt-4 pb-6 space-y-2 text-center">
+                <a href="#home" class="block px-3 py-3 text-lux-dark font-bold hover:bg-gray-50 rounded-lg">الرئيسية</a>
+                <a href="#departments" class="block px-3 py-3 text-lux-dark font-bold hover:bg-gray-50 rounded-lg">الأقسام</a>
+                <a href="#articles" class="block px-3 py-3 text-lux-dark font-bold hover:bg-gray-50 rounded-lg">إضاءات قضائية</a>
+                <a href="#laws" class="block px-3 py-3 text-lux-dark font-bold hover:bg-gray-50 rounded-lg">المكتبة والقوانين</a>
+                <a href="https://wa.me/9647770001992" target="_top" class="block mt-4 bg-[#25D366] text-white py-3 rounded-xl font-bold shadow-md">تواصل عبر واتساب المباشر</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <section id="home" class="relative pt-40 pb-20 lg:pt-56 lg:pb-32 bg-dark-gradient hero-pattern overflow-hidden">
+        <img src="https://i.postimg.cc/f3nRqFQg/54a42e57.jpg" alt="المحامية حنين الطائي" class="hero-watermark">
+        <div class="absolute top-1/4 right-0 w-96 h-96 bg-gold-main/10 rounded-full blur-[100px] z-0 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-10">
+                <div class="w-full lg:w-3/5 text-center lg:text-right">
+                    <div class="inline-block border border-gold-main/40 bg-lux-dark/80 backdrop-blur-md px-5 py-2 rounded-full mb-6">
+                        <span class="text-gold-light font-bold text-sm tracking-widest"><i class="fas fa-crown ml-2 text-gold-main"></i> الموثوقية • الدقة • الاحترافية</span>
+                    </div>
+                    <h2 class="text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.2] drop-shadow-2xl">
+                        المحامية <br>
+                        <span class="text-gold-gradient text-6xl lg:text-8xl mt-2 block">حنين الطائي</span>
+                    </h2>
+                    <p class="text-gray-300 text-lg lg:text-xl mb-10 leading-relaxed font-medium max-w-xl mx-auto lg:mx-0 drop-shadow-lg">
+                        نضع خبراتنا القانونية الرصينة لحماية حقوقكم وتمثيلكم أمام كافة درجات المحاكم العراقية بسرية تامة.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#inquiries" class="bg-gold-gradient text-lux-dark px-10 py-4 rounded-xl font-black text-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
+                            <i class="fas fa-balance-scale-right"></i> طلب استشارة
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- أقسام الاختصاص -->
+    <section id="departments" class="py-24 relative bg-lux-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-gold-main font-bold tracking-widest block mb-2">مجالات العمل</span>
+                <h2 class="text-4xl lg:text-5xl font-black text-lux-dark section-title">أقسام الاختصاص القانوني</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="lux-card p-10 text-center group">
+                    <div class="w-20 h-20 mx-auto bg-lux-bg rounded-2xl flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-gold-main transition-colors"><i class="fas fa-users text-4xl text-lux-dark group-hover:text-white transition-colors"></i></div>
+                    <h3 class="text-2xl font-black text-lux-dark mb-4">القسم المدني</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed">القضايا المدنية، النزاعات العقارية، صياغة العقود، والأحوال الشخصية.</p>
+                </div>
+                <div class="lux-card p-10 text-center group transform md:-translate-y-6 border-gold-main/50">
+                    <div class="w-24 h-24 mx-auto bg-lux-dark rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform"><i class="fas fa-gavel text-4xl text-gold-main"></i></div>
+                    <h3 class="text-2xl font-black text-lux-dark mb-4">القسم الجزائي</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed">الترافع والدفاع في الدعاوى الجزائية والجنائية أمام كافة المحاكم.</p>
+                </div>
+                <div class="lux-card p-10 text-center group">
+                    <div class="w-20 h-20 mx-auto bg-lux-bg rounded-2xl flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-gold-main transition-colors"><i class="fas fa-balance-scale-right text-4xl text-lux-dark group-hover:text-white transition-colors"></i></div>
+                    <h3 class="text-2xl font-black text-lux-dark mb-4">قسم المرافعات</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed">صياغة اللوائح التمييزية وتقديم الطعون القانونية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم إضاءات وقرارات (تم ربطه بلوحة التحكم) -->
+    <section id="articles" class="py-24 bg-white border-y border-gray-200/60 relative overflow-hidden">
+        <i class="fas fa-quote-right absolute -top-10 -right-10 text-[15rem] text-gray-50 opacity-50 pointer-events-none"></i>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <span class="text-gold-main font-bold tracking-widest block mb-2">مكتبة المعرفة</span>
+                    <h2 class="text-4xl lg:text-5xl font-black text-lux-dark">إضاءات ومبادئ قضائية</h2>
+                </div>
+            </div>
+            
+            <!-- الحاوية التي سيتم إضافة المقالات الجديدة إليها من لوحة التحكم -->
+            <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- المقال الأساسي 1 -->
+                <div onclick="openArticle('article1')" class="cursor-pointer bg-lux-bg rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 group flex flex-col h-full transform hover:-translate-y-2">
+                    <div class="h-2 w-full bg-gold-gradient"></div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex items-center justify-between mb-6"><span class="bg-red-50 text-red-600 border border-red-100 py-1.5 px-4 rounded-full text-xs font-black shadow-sm flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div> حصري وجديد</span></div>
+                        <h3 class="text-2xl font-black text-lux-dark mb-4 leading-snug group-hover:text-gold-main transition-colors">ثمرة الجهد القانوني: نقض قرار استئخار دعوى النشوز</h3>
+                        <p class="text-gray-500 font-medium leading-relaxed mb-8 line-clamp-3 flex-grow text-base">بفضل الله ومن خلال المتابعة القانونية الدقيقة، نجحت في استحصال قرار تمييزي يقضي بنقض قرار استئخار دعوى النشوز...</p>
+                        <div class="flex items-center justify-between border-t border-gray-200 pt-6 mt-auto">
+                            <span class="text-gold-main font-bold text-sm bg-white px-4 py-2 rounded-lg border border-gold-main/20">قراءة داخل الموقع <i class="fas fa-book-open mr-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المقال الأساسي 2 -->
+                <div onclick="openArticle('article2')" class="cursor-pointer bg-lux-bg rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 group flex flex-col h-full transform hover:-translate-y-2">
+                    <div class="h-2 w-full bg-lux-dark"></div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex items-center justify-between mb-6"><span class="bg-blue-50 text-lux-panel border border-blue-100 py-1.5 px-4 rounded-full text-xs font-black shadow-sm">تحليل تشريعي</span></div>
+                        <h3 class="text-2xl font-black text-lux-dark mb-4 leading-snug group-hover:text-gold-main transition-colors">العقوبة بين الردع والتمييز الجسدي في القوانين الملغاة</h3>
+                        <p class="text-gray-500 font-medium leading-relaxed mb-8 line-clamp-3 flex-grow text-base">أثناء البحث والاطلاع في مدونات القوانين العراقية السابقة توقفت عند نص قانوني يمثل مرحلة قاسية من تاريخ التشريع...</p>
+                        <div class="flex items-center justify-between border-t border-gray-200 pt-6 mt-auto">
+                            <span class="text-lux-dark group-hover:text-gold-main font-bold text-sm bg-white px-4 py-2 rounded-lg border border-gray-200">قراءة داخل الموقع <i class="fas fa-book-open mr-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم القوانين العراقية (تم ربطه بلوحة التحكم) -->
+    <section id="laws" class="py-24 bg-dark-gradient relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none hero-pattern"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-gold-main font-bold tracking-widest block mb-2">المرجع التشريعي</span>
+                <h2 class="text-4xl lg:text-5xl font-black text-white section-title">مكتبة القوانين العراقية</h2>
+            </div>
+            
+            <!-- الحاوية التي سيتم إضافة القوانين إليها -->
+            <div id="laws-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6">
+                <div class="bg-lux-panel border border-gray-700 p-6 rounded-2xl hover:border-gold-main transition-all group text-center cursor-pointer shadow-xl hover:-translate-y-2">
+                    <div class="w-14 h-14 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-gold-main/20"><i class="fas fa-book text-2xl text-gold-main"></i></div>
+                    <h4 class="font-black text-white text-sm mb-2">القانون المدني</h4><span class="text-xs text-gray-400 font-bold bg-gray-800 px-3 py-1 rounded-full">40 لسنة 1951</span>
+                </div>
+                <div class="bg-lux-panel border border-gray-700 p-6 rounded-2xl hover:border-gold-main transition-all group text-center cursor-pointer shadow-xl hover:-translate-y-2">
+                    <div class="w-14 h-14 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-gold-main/20"><i class="fas fa-balance-scale text-2xl text-gold-main"></i></div>
+                    <h4 class="font-black text-white text-sm mb-2">قانون العقوبات</h4><span class="text-xs text-gray-400 font-bold bg-gray-800 px-3 py-1 rounded-full">111 لسنة 1969</span>
+                </div>
+                <div class="bg-lux-panel border border-gray-700 p-6 rounded-2xl hover:border-gold-main transition-all group text-center cursor-pointer shadow-xl hover:-translate-y-2">
+                    <div class="w-14 h-14 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-gold-main/20"><i class="fas fa-users text-2xl text-gold-main"></i></div>
+                    <h4 class="font-black text-white text-sm mb-2">الأحوال الشخصية</h4><span class="text-xs text-gray-400 font-bold bg-gray-800 px-3 py-1 rounded-full">188 لسنة 1959</span>
+                </div>
+                <div class="bg-lux-panel border border-gray-700 p-6 rounded-2xl hover:border-gold-main transition-all group text-center cursor-pointer shadow-xl hover:-translate-y-2">
+                    <div class="w-14 h-14 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-gold-main/20"><i class="fas fa-gavel text-2xl text-gold-main"></i></div>
+                    <h4 class="font-black text-white text-sm mb-2">المرافعات المدنية</h4><span class="text-xs text-gray-400 font-bold bg-gray-800 px-3 py-1 rounded-full">83 لسنة 1969</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم مشاركة البحوث -->
+    <section id="research" class="py-24 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-lux-bg rounded-[2rem] shadow-xl border border-gold-main/30 overflow-hidden flex flex-col md:flex-row">
+                <div class="w-full md:w-5/12 bg-lux-dark p-10 text-white flex flex-col justify-center relative">
+                    <i class="fas fa-book-reader text-5xl text-gold-main mb-6"></i>
+                    <h3 class="text-3xl font-black mb-4">منبر الباحثين القانونيين</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">إيماناً منا بأهمية تبادل المعرفة القانونية، نتيح لزملائنا المحامين إرسال بحوثهم عبر منصتنا.</p>
+                </div>
+                <div class="w-full md:w-7/12 p-10 bg-white">
+                    <form onsubmit="event.preventDefault(); alert('تم الإرسال بنجاح للتدقيق.'); this.reset();" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div><label class="block text-sm font-bold mb-2">الاسم</label><input type="text" required class="w-full px-5 py-3 bg-gray-50 border rounded-xl focus:border-gold-main outline-none"></div>
+                            <div><label class="block text-sm font-bold mb-2">الصفة العلمية</label><input type="text" required class="w-full px-5 py-3 bg-gray-50 border rounded-xl focus:border-gold-main outline-none"></div>
+                        </div>
+                        <div><label class="block text-sm font-bold mb-2">عنوان البحث</label><input type="text" required class="w-full px-5 py-3 bg-gray-50 border rounded-xl focus:border-gold-main outline-none"></div>
+                        <button type="submit" class="bg-lux-panel text-white font-bold px-8 py-3 rounded-xl hover:bg-gold-main transition-colors flex items-center gap-2"><i class="fas fa-paper-plane"></i> إرسال</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الاستفسارات والدفع -->
+    <section id="inquiries" class="py-24 bg-lux-bg border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- طلب استشارة -->
+                <div class="bg-white p-10 rounded-[2rem] shadow-xl border border-gray-100 relative overflow-hidden">
+                    <h3 class="text-3xl font-black text-lux-dark mb-2 relative z-10">طلب استشارة قانونية</h3>
+                    <p class="text-gray-500 mb-8 font-medium relative z-10">معلوماتك مشفرة ومحمية. املأ النموذج للتواصل بسرية.</p>
+                    <form onsubmit="event.preventDefault(); alert('تم استلام الطلب بسرية تامة.');" class="space-y-5 relative z-10">
+                        <input type="text" placeholder="الاسم أو اللقب" required class="w-full px-5 py-4 bg-gray-50 border rounded-xl focus:border-gold-main outline-none font-medium">
+                        <input type="tel" placeholder="رقم الهاتف" required class="w-full px-5 py-4 bg-gray-50 border rounded-xl focus:border-gold-main outline-none font-medium">
+                        <button type="submit" class="w-full bg-lux-dark text-gold-main font-black text-lg py-4 rounded-xl hover:bg-gold-main hover:text-lux-dark transition shadow-lg">طلب استشارة سرية</button>
+                    </form>
+                </div>
+                
+                <!-- الروابط الثابتة لا تتأثر بالإضافة -->
+                <div class="flex flex-col justify-between">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="https://www.sjc.iq/" target="_top" class="bg-white p-5 rounded-xl border shadow-sm hover:border-gold-main transition flex items-center gap-3"><div class="bg-gray-50 p-3 rounded-lg"><i class="fas fa-landmark text-lux-dark text-xl"></i></div><span class="font-bold text-lux-dark text-sm">مجلس القضاء الأعلى</span></a>
+                        <a href="https://lawyers.gov.iq" target="_top" class="bg-white p-5 rounded-xl border shadow-sm hover:border-gold-main transition flex items-center gap-3"><div class="bg-gray-50 p-3 rounded-lg"><i class="fas fa-id-badge text-lux-dark text-xl"></i></div><span class="font-bold text-lux-dark text-sm">نقابة المحامين</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر الملكي -->
+    <footer id="contact" class="bg-lux-dark text-white pt-20 border-t-4 border-gold-main relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 pb-16">
+                <div class="col-span-1">
+                    <h2 class="text-3xl font-black text-white mb-2 tracking-tight">المحامية <span class="text-gold-main">حنين الطائي</span></h2>
+                    <div class="w-12 h-1 bg-gold-main mb-8 rounded-full"></div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 py-6 text-center text-gray-500 text-sm font-medium">
+                &copy; 2024 جميع الحقوق محفوظة لـ <span class="text-gold-main font-bold">المحامية حنين الطائي</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- قاعدة بيانات المقالات للقراءة ---
+        const articlesDatabase = {
+            'article1': { tag: 'حصري وجديد', title: 'ثمرة الجهد القانوني: نقض قرار استئخار دعوى النشوز', content: `<p>بفضل الله ومن خلال المتابعة الدقيقة، نجحت في استحصال قرار تمييزي يقضي بنقض قرار استئخار دعوى النشوز.</p>` },
+            'article2': { tag: 'تحليل تشريعي', title: 'العقوبة بين الردع والتمييز الجسدي في القوانين الملغاة', content: `<p>أثناء البحث في القوانين السابقة، توقفت عند نص يمثل مرحلة قاسية من تاريخ التشريع...</p>` }
+        };
+
+        // --- دوال القراءة (المقالات) ---
+        const articleModal = document.getElementById('article-modal');
+        const articleContainer = document.getElementById('article-container');
+
+        function openArticle(articleId) {
+            const article = articlesDatabase[articleId];
+            if (!article) return;
+            document.getElementById('modal-tag').innerText = article.tag;
+            document.getElementById('modal-title').innerText = article.title;
+            document.getElementById('modal-content').innerHTML = article.content;
+            
+            articleModal.classList.remove('hidden'); articleModal.classList.add('flex');
+            setTimeout(() => { articleModal.classList.remove('opacity-0'); articleContainer.classList.remove('scale-95'); document.body.style.overflow = 'hidden'; }, 10);
+        }
+
+        function closeArticle() {
+            articleModal.classList.add('opacity-0'); articleContainer.classList.add('scale-95');
+            setTimeout(() => { articleModal.classList.add('hidden'); articleModal.classList.remove('flex'); document.body.style.overflow = 'auto'; }, 300);
+        }
+
+        // --- دوال الإدارة (إضافة محتوى جديد) ---
+        const adminModal = document.getElementById('admin-modal');
+        const adminContainer = document.getElementById('admin-container');
+        const contentTypeSelect = document.getElementById('content-type');
+        const contentDescWrapper = document.getElementById('content-desc-wrapper');
+
+        // تغيير شكل الفورم حسب الاختيار
+        contentTypeSelect.addEventListener('change', function() {
+            if(this.value === 'law') { contentDescWrapper.style.display = 'none'; } 
+            else { contentDescWrapper.style.display = 'block'; }
+        });
+
+        function openAdmin() {
+            adminModal.classList.remove('hidden'); adminModal.classList.add('flex');
+            setTimeout(() => { adminModal.classList.remove('opacity-0'); adminContainer.classList.remove('scale-95'); document.body.style.overflow = 'hidden'; }, 10);
+        }
+
+        function closeAdmin() {
+            adminModal.classList.add('opacity-0'); adminContainer.classList.add('scale-95');
+            setTimeout(() => { adminModal.classList.add('hidden'); adminModal.classList.remove('flex'); document.body.style.overflow = 'auto'; }, 300);
+        }
+
+        function addNewContent(e) {
+            e.preventDefault();
+            const type = document.getElementById('content-type').value;
+            const title = document.getElementById('content-title').value;
+            const tag = document.getElementById('content-tag').value;
+            const content = document.getElementById('content-desc').value;
+
+            if (type === 'article') {
+                // توليد ID جديد للمقال
+                const newId = 'article_' + Date.now();
+                
+                // حفظه في قاعدة البيانات الوهمية ليتم قراءته
+                articlesDatabase[newId] = {
+                    tag: tag, title: title, content: `<p>${content.replace(/\n/g, '<br>')}</p>`
+                };
+
+                // إنشاء كارت المقال وإضافته في أول الشبكة
+                const newCard = `
+                <div onclick="openArticle('${newId}')" class="cursor-pointer bg-lux-bg rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gold-main group flex flex-col h-full transform hover:-translate-y-2">
+                    <div class="h-2 w-full bg-gold-main"></div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex items-center justify-between mb-6"><span class="bg-gray-100 text-gray-800 border border-gray-200 py-1.5 px-4 rounded-full text-xs font-black">${tag}</span></div>
+                        <h3 class="text-2xl font-black text-lux-dark mb-4 leading-snug group-hover:text-gold-main transition-colors">${title}</h3>
+                        <p class="text-gray-500 font-medium leading-relaxed mb-8 line-clamp-3 flex-grow text-base">${content.substring(0, 100)}...</p>
+                        <div class="flex items-center justify-between border-t border-gray-200 pt-6 mt-auto">
+                            <span class="text-gold-main font-bold text-sm bg-white px-4 py-2 rounded-lg border border-gold-main/20">قراءة داخل الموقع <i class="fas fa-book-open mr-1"></i></span>
+                        </div>
+                    </div>
+                </div>`;
+                document.getElementById('articles-grid').insertAdjacentHTML('afterbegin', newCard);
+            } 
+            else if (type === 'law') {
+                // إنشاء كارت القانون
+                const newCard = `
+                <div class="bg-lux-panel border border-gold-main p-6 rounded-2xl hover:bg-lux-dark transition-all group text-center cursor-pointer shadow-xl hover:-translate-y-2">
+                    <div class="w-14 h-14 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4"><i class="fas fa-book text-2xl text-gold-main"></i></div>
+                    <h4 class="font-black text-white text-sm mb-2">${title}</h4>
+                    <span class="text-xs text-gold-main font-bold bg-gray-800 px-3 py-1 rounded-full">${tag}</span>
+                </div>`;
+                document.getElementById('laws-grid').insertAdjacentHTML('afterbegin', newCard);
+            }
+
+            // إظهار رسالة النجاح وإغلاق النافذة
+            const toast = document.getElementById('toast');
+            toast.innerText = 'تم إضافة المحتوى بنجاح!';
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            
+            document.getElementById('admin-form').reset();
+            closeAdmin();
+        }
+
+        // --- دوال أخرى ---
+        function copyToClipboard(text, btnElement) { ... }
+        window.addEventListener('scroll', () => { ... });
+    </script>
+</body>
+</html>
