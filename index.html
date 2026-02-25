@@ -155,8 +155,7 @@
         </div>
     </div>
 
-    <!-- الأزرار العائمة -->
-    <a href="https://wa.me/9647770001992" target="_top" class="fixed bottom-10 left-10 bg-[#25D366] text-white w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-2xl z-[150] transition-transform hover:scale-110"><i class="fab fa-whatsapp"></i></a>
+    <!-- الأزرار العائمة (تم حذف الواتساب والإبقاء على زر الإدارة فقط) -->
     <button onclick="openAdmin()" class="fixed bottom-10 right-10 bg-lux-dark text-gold-main border-4 border-gold-main/20 w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-2xl z-[150] hover:rotate-90 transition-all duration-700"><i class="fas fa-user-cog"></i></button>
 
     <!-- شريط الأخبار -->
@@ -181,7 +180,7 @@
                 <a href="#students" class="font-black text-lux-dark hover:text-gold-main transition">ركن الطلاب</a>
                 <a href="#laws" class="font-black text-lux-dark hover:text-gold-main transition">المكتبة</a>
                 <button onclick="openSearch()" class="text-lux-dark hover:text-gold-main transition p-4 bg-gray-50 rounded-full shadow-inner"><i class="fas fa-search text-xl"></i></button>
-                <a href="https://wa.me/9647770001992" target="_top" class="bg-lux-dark text-gold-main px-10 py-4 rounded-2xl font-black shadow-xl hover:scale-105 transition-all text-base">تواصل مباشر</a>
+                <a href="#inquiries" class="bg-lux-dark text-gold-main px-10 py-4 rounded-2xl font-black shadow-xl hover:scale-105 transition-all text-base">تواصل مباشر</a>
             </div>
             <div class="lg:hidden flex items-center gap-4">
                 <button onclick="openSearch()" class="text-lux-dark text-3xl"><i class="fas fa-search"></i></button>
@@ -334,7 +333,7 @@
         <div class="w-full max-w-5xl bg-white p-16 md:p-32 rounded-[5rem] shadow-2xl border-4 border-gold-main/10 text-center">
             <h3 class="text-6xl font-black mb-6 text-lux-dark">طلب استشارة قانونية</h3>
             <p class="text-gold-main font-black text-3xl mb-16 tracking-widest">بسرية وموثوقية تامة</p>
-            <form class="space-y-12" onsubmit="event.preventDefault(); showToast('تم استلام طلبكم، سنتواصل معكم بسرية تامة.'); this.reset();">
+            <form class="space-y-12" onsubmit="event.preventDefault(); showToast('تم استلام طلبكم، وسنتواصل معكم بسرية تامة قريباً.'); this.reset();">
                 <input type="text" placeholder="الاسم الكامل أو اللقب" required class="w-full px-12 py-8 bg-gray-50 border-4 border-transparent rounded-[2.5rem] outline-none focus:border-gold-main font-black text-2xl shadow-inner transition-all">
                 <input type="tel" placeholder="رقم الهاتف للتواصل المباشر" required class="w-full px-12 py-8 bg-gray-50 border-4 border-transparent rounded-[2.5rem] outline-none focus:border-gold-main font-black text-2xl text-center shadow-inner transition-all" dir="ltr">
                 <textarea rows="6" placeholder="ملخص بسيط لموضوع القضية..." required class="w-full px-12 py-8 bg-gray-50 border-4 border-transparent rounded-[2.5rem] outline-none focus:border-gold-main font-bold text-2xl resize-none shadow-inner transition-all"></textarea>
